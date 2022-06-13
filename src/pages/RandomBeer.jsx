@@ -1,13 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const RandomBeer = ({ beers }) => {
-  const randBeerNum = Math.floor(Math.random() * beers.length);
+const RandomBeer = () => {
+  const [randBeer, setRandBeer] = useState('');
 
-  console.log(randBeerNum);
+  useEffect(() => {
+    axios
+      .get('https://ih-beers-api2.herokuapp.com/beers/random')
+      .then((response) => {
+        setRandBeer(response.data);
+      });
+  }, []);
 
-  const randBeer = beers[randBeerNum];
+  // This works too when using props.beers =>
+
+  // const randBeerNum = Math.floor(Math.random() * beers.length);
+
+  // console.log(randBeerNum);
+
+  // const randBeer = beers[randBeerNum];
 
   return (
     <div>
