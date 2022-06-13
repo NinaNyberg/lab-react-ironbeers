@@ -1,14 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
-// import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
-const ListBeers = ({ beers }) => {
+const ListBeers = ({ beers, searchBeer }) => {
+  const [searchInput, setSearchInput] = useState('');
+
+  // useEffect(() => {
+  //   axios.get("https://ih-beers-api2.herokuapp.com/beers/search?q={query}")
+  //   .then((data) => )
+  // }, [])
+
+  const handleChange = (e) => {
+    // e.preventDefault();
+    setSearchInput(e.target.value);
+    console.log(e.target.value);
+    searchBeer(e.target.value);
+  };
+
   return (
     <div>
       <Navbar />
       <h1>ListBeers</h1>
+
+      <input
+        type="text"
+        name="searchInput"
+        placeholder="Search..."
+        value={searchInput}
+        onChange={handleChange}
+      />
 
       {/* <div className="container">
         <div className="row"> */}
